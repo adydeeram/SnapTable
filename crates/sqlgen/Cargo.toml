@@ -1,0 +1,15 @@
+[package]
+name = "snaptable-sqlgen"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[dependencies]
+snaptable-core.workspace = true
+serde.workspace = true
+ts-rs.workspace = true

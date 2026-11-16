@@ -1,0 +1,22 @@
+{
+  "$comment": "Single source of truth for app commands with keyboard shortcuts. Read by the Rust menu builder (src-tauri/src/menu.rs) and the UI command registry (ui/src/app/commands.ts). Accelerators use Tauri syntax.",
+  "commands": [
+    { "id": "app.palette",        "label": "Command Palette…",        "menu": "View",  "accelerator": "CmdOrCtrl+K" },
+    { "id": "app.quickOpen",      "label": "Quick Open Table…",       "menu": "View",  "accelerator": "CmdOrCtrl+P" },
+    { "id": "mode.db",            "label": "Database Mode",           "menu": "View",  "accelerator": "CmdOrCtrl+1" },
+    { "id": "mode.api",           "label": "API Mode",                "menu": "View",  "accelerator": "CmdOrCtrl+2" },
+    { "id": "view.toggleSidebar", "label": "Toggle Sidebar",          "menu": "View",  "accelerator": "CmdOrCtrl+B" },
+    { "id": "conn.new",           "label": "New Connection…",         "menu": "File",  "accelerator": "CmdOrCtrl+N" },
+    { "id": "tab.newQuery",       "label": "New Query Tab",           "menu": "File",  "accelerator": "CmdOrCtrl+T" },
+    { "id": "tab.close",          "label": "Close Tab",               "menu": "File",  "accelerator": "CmdOrCtrl+W" },
+    { "id": "tab.reopen",         "label": "Reopen Closed Tab",       "menu": "File",  "accelerator": "CmdOrCtrl+Shift+T" },
+    { "id": "tab.prev",           "label": "Previous Tab",            "menu": "Window", "accelerator": "CmdOrCtrl+Shift+[" },
+    { "id": "tab.next",           "label": "Next Tab",                "menu": "Window", "accelerator": "CmdOrCtrl+Shift+]" },
+    { "id": "query.runCurrent",   "label": "Run Current Statement",   "menu": "Query", "accelerator": "CmdOrCtrl+Enter" },
+    { "id": "query.runAll",       "label": "Run All",                 "menu": "Query", "accelerator": "CmdOrCtrl+Shift+Enter" },
+    { "id": "query.cancel",       "label": "Cancel Running Query",    "menu": "Query", "accelerator": "CmdOrCtrl+." },
+    { "id": "data.refresh",       "label": "Refresh",                 "menu": "Query", "accelerator": "CmdOrCtrl+R" },
+    { "id": "data.filter",        "label": "Filter Rows",             "menu": "Query", "accelerator": "CmdOrCtrl+F" },
+    { "id": "app.history",        "label": "Query History",           "menu": "View",  "accelerator": "CmdOrCtrl+Y" }
+  ]
+}

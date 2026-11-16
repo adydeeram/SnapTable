@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-conn-disconnect"
+description = "Enables the conn_disconnect command without any pre-configured scope."
+commands.allow = ["conn_disconnect"]
+
+[[permission]]
+identifier = "deny-conn-disconnect"
+description = "Denies the conn_disconnect command without any pre-configured scope."
+commands.deny = ["conn_disconnect"]

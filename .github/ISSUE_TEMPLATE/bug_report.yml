@@ -1,0 +1,51 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting! **Never paste passwords, connection strings with credentials, or production data.**
+        Security issues: please use [private reporting](../security/advisories/new) instead.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: repro
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Connect to PostgreSQL 16
+        2. Open table …
+        3. …
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: SnapTable version / commit
+    validations:
+      required: true
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version and chip
+      placeholder: macOS 15.2, Apple M2
+    validations:
+      required: true
+  - type: dropdown
+    id: engine
+    attributes:
+      label: Database engine
+      multiple: true
+      options: [PostgreSQL, SQLite, Not database-related]
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs
+      description: Run from a terminal with `RUST_LOG=debug` and paste relevant lines (redact hostnames if needed).
+      render: text

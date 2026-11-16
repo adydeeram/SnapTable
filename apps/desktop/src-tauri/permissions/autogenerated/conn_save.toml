@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-conn-save"
+description = "Enables the conn_save command without any pre-configured scope."
+commands.allow = ["conn_save"]
+
+[[permission]]
+identifier = "deny-conn-save"
+description = "Denies the conn_save command without any pre-configured scope."
+commands.deny = ["conn_save"]

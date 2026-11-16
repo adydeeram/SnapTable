@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-table-count"
+description = "Enables the table_count command without any pre-configured scope."
+commands.allow = ["table_count"]
+
+[[permission]]
+identifier = "deny-table-count"
+description = "Denies the table_count command without any pre-configured scope."
+commands.deny = ["table_count"]

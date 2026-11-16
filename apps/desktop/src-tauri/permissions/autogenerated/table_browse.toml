@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-table-browse"
+description = "Enables the table_browse command without any pre-configured scope."
+commands.allow = ["table_browse"]
+
+[[permission]]
+identifier = "deny-table-browse"
+description = "Denies the table_browse command without any pre-configured scope."
+commands.deny = ["table_browse"]

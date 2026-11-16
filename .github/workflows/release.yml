@@ -1,0 +1,73 @@
+name: Release
+
+# Push a tag like `v0.1.0` to build a universal (Apple Silicon + Intel) .dmg and attach
+# it to a draft GitHub Release. Signing and notarization run only when the Apple
+# secrets are configured (see CONTRIBUTING.md → "Releases"); otherwise the build is
+# unsigned and users have to approve it on first launch.
+
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: macos-latest
+    environment: release
+    defaults:
+      run:
+        working-directory: apps/desktop
+    env:
+      HAS_SIGNING: ${{ secrets.APPLE_CERTIFICATE != '' }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: aarch64-apple-darwin,x86_64-apple-darwin
+      - uses: Swatinem/rust-cache@v2
+      - run: corepack enable && pnpm install --frozen-lockfile
+
+      - name: Build (signed + notarized)
+        if: env.HAS_SIGNING == 'true'
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          APPLE_CERTIFICATE: ${{ secrets.APPLE_CERTIFICATE }}
+          APPLE_CERTIFICATE_PASSWORD: ${{ secrets.APPLE_CERTIFICATE_PASSWORD }}
+          APPLE_SIGNING_IDENTITY: ${{ secrets.APPLE_SIGNING_IDENTITY }}
+          APPLE_API_ISSUER: ${{ secrets.APPLE_API_ISSUER }}
+          APPLE_API_KEY: ${{ secrets.APPLE_API_KEY }}
+          APPLE_API_KEY_PATH: ${{ secrets.APPLE_API_KEY_PATH }}
+        with:
+          projectPath: apps/desktop
+          tauriScript: pnpm tauri
+          args: --target universal-apple-darwin
+          tagName: ${{ github.ref_name }}
+          releaseName: SnapTable ${{ github.ref_name }}
+          releaseBody: See CHANGELOG.md for details.
+          releaseDraft: true
+          prerelease: true
+
+      - name: Build (unsigned)
+        if: env.HAS_SIGNING != 'true'
+        uses: tauri-apps/tauri-action@v0
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          projectPath: apps/desktop
+          tauriScript: pnpm tauri
+          args: --target universal-apple-darwin
+          tagName: ${{ github.ref_name }}
+          releaseName: SnapTable ${{ github.ref_name }}
+          releaseBody: |
+            Unsigned preview build. macOS will block it on first launch. Either right-click
+            SnapTable.app → Open, or run: `xattr -dr com.apple.quarantine /Applications/SnapTable.app`
+            See CHANGELOG.md for details.
+          releaseDraft: true
+          prerelease: true

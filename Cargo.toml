@@ -1,0 +1,40 @@
+[workspace]
+resolver = "3"
+members = ["crates/*", "apps/desktop/src-tauri"]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2024"
+license = "MIT"
+repository = "https://github.com/adydeeram/SnapTable"
+rust-version = "1.85"
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[workspace.lints.clippy]
+all = { level = "warn", priority = -1 }
+
+[profile.release]
+lto = "thin"
+codegen-units = 1
+strip = true
+
+[workspace.dependencies]
+snaptable-core = { path = "crates/core" }
+snaptable-sqlgen = { path = "crates/sqlgen" }
+snaptable-store = { path = "crates/store" }
+snaptable-secrets = { path = "crates/secrets" }
+snaptable-drivers = { path = "crates/drivers" }
+
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "sync", "time"] }
+tokio-util = "0.7"
+futures-util = "0.3"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+thiserror = "2"
+uuid = { version = "1", features = ["v4", "v7", "serde"] }
+tracing = "0.1"
+secrecy = "0.10"
+ts-rs = { version = "12", features = ["serde-json-impl", "uuid-impl", "no-serde-warnings"] }
+sqlx = { version = "0.9", default-features = false, features = ["runtime-tokio", "tls-rustls-ring-native-roots", "postgres", "sqlite", "macros", "migrate"] }

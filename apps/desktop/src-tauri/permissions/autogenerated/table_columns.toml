@@ -1,0 +1,11 @@
+# Automatically generated - DO NOT EDIT!
+
+[[permission]]
+identifier = "allow-table-columns"
+description = "Enables the table_columns command without any pre-configured scope."
+commands.allow = ["table_columns"]
+
+[[permission]]
+identifier = "deny-table-columns"
+description = "Denies the table_columns command without any pre-configured scope."
+commands.deny = ["table_columns"]

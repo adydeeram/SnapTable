@@ -1,0 +1,33 @@
+[package]
+name = "snaptable-desktop"
+description = "SnapTable desktop app"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+name = "snaptable_desktop_lib"
+crate-type = ["staticlib", "cdylib", "rlib"]
+
+[build-dependencies]
+tauri-build = { version = "2", features = [] }
+
+[dependencies]
+snaptable-core.workspace = true
+snaptable-sqlgen.workspace = true
+snaptable-store.workspace = true
+snaptable-secrets.workspace = true
+snaptable-drivers.workspace = true
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tracing.workspace = true
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+secrecy.workspace = true
